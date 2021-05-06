@@ -3,13 +3,13 @@ class user:
         self.name=name
         self.age=age
         self.height=height
-        self.balance=BankAccount(x,y)
-    def deposit(self,amount):
-        self.balance.deposit(amount)
-    def withdraw(self,amount):
-        self.balance.withdraw(amount)
-    def display(self):
-        self.balance.display
+        self.balance=[BankAccount(x,y)]
+    def newbankaccount(self,x,y):
+        self.balance.append(BankAccount(x,y))
+    def withdraw(self,amount,banknum):
+        self.balance[banknum].withdraw(amount)
+    def deposit(self,amount,banknum):
+        self.balance[banknum].deposit(amount)
 class BankAccount:
     def __init__(self,rate,balance):
         self.balance=balance
@@ -21,8 +21,9 @@ class BankAccount:
         self.balance-=amount
         return self
     def display(self):
-        print(self.balance)
+        return self.balance
     def yield_interest(self):
         self.balance=self.balance+(self.rate*self.balance)
         return self
- 
+amro=user("amro",25,25,25,25)
+print(amro.balance[0].display())
