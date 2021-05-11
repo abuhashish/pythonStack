@@ -1,0 +1,13 @@
+*{
+    padding: 0;
+    margin: 0 auto;
+}
+.container{
+    height: 400px;  
+}
+.box{
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    display: inline-block;
+}
