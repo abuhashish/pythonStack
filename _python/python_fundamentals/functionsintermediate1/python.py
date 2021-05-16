@@ -6,4 +6,4 @@ def randInt(min=0   , max=100  ):
         return "max cannot be smaller than zero"
     num =min+ random.random()*max
     return num
-print(randInt(0,50))
+print(randInt(60,50))
