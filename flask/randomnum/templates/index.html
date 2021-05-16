@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {%if session['attempts']>5%}
+        <div>
+            <h1>You Have lost please Try Again by clicking on the button below</h1>
+            <a style="border:1px solid black; background-color: greenyellow; width: 50px; height: 50px;"" href="again">Try Again</a>
+        </div>
+    {%else%}
+        <h1>Welcome to the enat number game</h1>
+        <h4>i am thinking of a number between 1 and 1000</h4>
+        <h4>take a guess</h4>
+        
+        <form method="post" action="/check">
+            <input name="num" type="text">
+            <br><br>
+            <button name="submit" type="submit">Submit</button>
+        </form>
+        <h3>you tried {{session['attempts']}} times</h3>
+        {%if 'green' in session%}
+        <div class="green" style="text-align: center;"> 
+            you have won with {{session['attempts']}} attempts
+        </div>
+        {%elif 'red' in session%}
+        <div class="red"></div>
+        {%endif%}
+    {%endif%}
+    
+    {%if 'green' in session%}
+        <h1>the number was {{session['num']}}</h1>
+        <form method="post" action="/leaderboard">
+            <label for="name">Name</label>
+            <input placeholder="name" name="name">
+            <button name="submit" type="submit">submit</button>
+        </form>
+
+    {%endif%}
+    <style>
+        .green{
+            width: 100px;
+            height: 100px;
+            background-color: green;
+        }
+        .red{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</body>
+</html>
