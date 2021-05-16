@@ -1,0 +1,22 @@
+{%if 'sick' is in session%}
+<h1>{{session['sick']}}</h1>
+
+{%endif%}
+<h1>you visted this page <span>{{count}}</span> times</h1>
+<form method="get" action="/addtwo">
+    <button type="submit">addtwo</button>
+</form>
+<form method="get" action="/destroy_session">
+    <button type="submit">reset</button>
+</form>
+<form  method="post" action="/addx">
+<label for="num">add your number</label>
+<input type="text"name="num" >
+<button type="submit">submit</button>
+</form>
+<style>
+    span{
+        color: blue;
+        font-size: 100px;
+    }
+</style>
