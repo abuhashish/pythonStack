@@ -1,0 +1,13 @@
+users.objects.all().values()
+users.objects.create(first_name="aero",last_name="abuhashish",email_address="aasahashish@gmail.com",age="15")
+users.objects.create(first_name="amro",last_name="abuhashish",email_address="aasahashish@gmail.com",age="15")
+users.objects.create(first_name="axo",last_name="abuhashish",email_address="aasahashish@gmail.com",age="15")
+users.objects.first().__dict__
+users.objects.last().__dict__
+p=users.objects.last()
+p.last_name="pancackes"
+p.save
+p=users.objects.get(id=2)
+p.delete
+p.save
+users.objects.all().order_by("first_name")
