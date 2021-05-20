@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        th,td{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>All the Users</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+            </tr>
+            {%for i in x %}
+            <tr>
+                <td>{{i.first_name}}</td>
+                <td>{{i.last_name}}</td>
+                <td>{{i.email_address}}</td>
+                <td>{{i.age}}</td>
+            </tr>
+            {%endfor%}
+        </table>
+        <br><br><br><br>
+        <form action="/add" method="post">
+            {% csrf_token %}
+            <label for="fname"> firstname</label>
+            <input type="text" name="fname">
+            <label for="lname"> lastname</label>
+            <input type="text" name="lname">
+            <label for="email"> email</label>
+            <input type="email" name="email">
+            <label for="age">age</label>
+            <input type="text" name="age">
+            <button type="submit"> Add</button>
+        </form>
+    </main>
+</body>
+</html>
