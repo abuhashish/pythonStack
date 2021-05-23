@@ -16,6 +16,8 @@
     <div class="main">
         <div class="left">
             <form action="addbook" method="POST">
+                {% csrf_token %}
+                <h1>Add A Book</h1>
                 <label for="title"> Title</label>
                 <input name="title" type="text">
                 <br><br>
