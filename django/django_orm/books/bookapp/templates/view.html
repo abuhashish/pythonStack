@@ -13,9 +13,23 @@
     <textarea>{{book.desc}}</textarea>
     <ul>
         <li>
-            
-        {%for i in book.authors%}
+            Authors
+        
+            <ul>
+               {%for i in book.authors.values%}
+               <li> {{i.first_name}} {{i.last_name}} </li>
+               {%endfor%}
+            </ul>
         </li>
     </ul>
+    <form action="/addauthorbook/{{book.id}}" method="post">
+        {% csrf_token %}
+        <select name="id">
+            {%for i in z%}
+            <option value="{{i.id}}">{{i.first_name}} {{i.last_name}}</option>
+            {%endfor%}
+        </select>
+        <input type="submit">
+    </form>
 </body>
 </html>
