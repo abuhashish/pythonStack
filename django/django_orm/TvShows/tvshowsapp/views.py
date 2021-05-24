@@ -10,6 +10,9 @@ def index(request):
     return render(request,"index.html",context)
 def addshow(request):
     errors= Show.objects.basic_validator(request.POST)
+    for i in Show.objects.all():
+            if i.title == request.POST['title']:
+                errors['unique']="title is not unique"
     if len(errors)>0:
         for key, value in errors.items():
             messages.error(request, value)

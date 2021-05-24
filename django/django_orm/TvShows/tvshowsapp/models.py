@@ -1,6 +1,7 @@
 
+from django.contrib.messages.api import error
 from django.db import models
-    
+
 class ShowManger(models.Manager):
     def basic_validator(self, postData):
         errors = {}
@@ -11,14 +12,11 @@ class ShowManger(models.Manager):
             errors["network"] = "network  should be at least 3 characters"
         if len(postData['desc']) < 10:
             errors["desc"] = "description  should be at least 10 characters"
-        for i in Show.objects.all():
-            if i.title == postData['title']:
-                errors['unqiue']="title name must be unique"
         return errors
 class Show(models.Model):
-    title = models.CharField(max_length=45)
+    title = models.CharField(max_length=45,unique=True)
     network = models.CharField(max_length=45)
-    description = models.TextField()
+    description = models.TextField(default=None, blank=True, null=True)
     release_date = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
