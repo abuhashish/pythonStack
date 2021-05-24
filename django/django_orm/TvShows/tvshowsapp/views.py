@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render,HttpResponse
 from tvshowsapp.models import *
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -8,6 +9,11 @@ def index(request):
     }
     return render(request,"index.html",context)
 def addshow(request):
+    errors= Show.objects.basic_validator(request.POST)
+    if len(errors)>0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/shows')
     Show.objects.create(title=request.POST['title']
     ,network=request.POST['network'],
     description=request.POST['desc'],
@@ -25,6 +31,11 @@ def edit(request,id):
     }
     return render(request,"edit.html",context)
 def applyedit(request):
+    errors= Show.objects.basic_validator(request.POST)
+    if len(errors)>0:
+        for key, value in errors.items():
+            messages.error(request, value)
+        return redirect('/edit/'+request.POST['id'])
     x=Show.objects.get(id=request.POST['id'])
     x.title=request.POST['title']
     x.description=request.POST['desc']
