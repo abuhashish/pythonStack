@@ -11,7 +11,10 @@ urlpatterns = [
     path('logout',views.logout),
     path('loginz',views.loginz),
     path('addmessage',views.addmessage),
-    path('addcomment/<int:id>',views.addcomment)
+    path('addcomment/<int:id>',views.addcomment),
+    path('deletecomment/<int:id>',views.deletecomment),
+    path('deletemessage/<int:id>',views.deletemessage),
+    path('profile/<int:id>',views.profile)
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,

@@ -29,9 +29,10 @@ def reg(request):
             return redirect('/welcome')
 def welcome(request):
     if 'user' in request.session:
+        x=User.objects.get(id=request.session['user']['id'])
         context={
-            'x':User.objects.last(),
-            'y':Message.objects.all()
+            'x': x,
+            'y':Message.objects.all().order_by('-created_at')
         }
         return render(request,'welcome.html',context)
     return redirect('/login')
@@ -69,3 +70,17 @@ def addcomment(request,id):
     comment=request.POST['text']
     Comment.objects.create(user=userid,message=messageid,comment=comment)
     return redirect('/welcome')
+def deletecomment(request,id):
+    x=Comment.objects.get(id=id)
+    x.delete()
+    return redirect('/welcome')
+def deletemessage(request,id):
+    x=Message.objects.get(id=id)
+    x.delete()
+    return redirect('/welcome')
+def profile(request,id):
+    user=User.objects.get(id=id)
+    context={
+        'x':user
+    }
+    return render(request,"profile.html",context)

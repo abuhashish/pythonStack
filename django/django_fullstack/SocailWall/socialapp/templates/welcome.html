@@ -50,12 +50,15 @@
           </span>
           <span class="commenter-name">
             <a href="#">{{i.user.username}}</a> 
+            {%if i.user.id == request.session.user.id%}
+            <a href="/deletemessage/{{i.id}}" style="margin-left: 1000px;">Delete</a>
+            {%endif%}
           </span>       
           <p class="comment-txt more">{{i.message}}</p>
           <div class="comment-meta">
            
             <p>
-              <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Comment</a>
+              <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Replay</a>
              
             </p>
             <div class="row">
@@ -71,7 +74,6 @@
                   </div>
                 </div>
               </div>
-           
             </div>
           </div>
           {%for g in i.comments.all%}
@@ -83,7 +85,11 @@
               <a href="#">{{g.user.username}}</a> <span 
             </span>       
             <p class="comment-txt more">{{g.comment}}</p>
-           
+            <div class="comment-meta">
+              {% if g.user.id == request.session.user.id %}
+              <a href="deletecomment/{{g.id}}">Delete </a>   
+              {%endif%}
+            </div>
           
           </div>
           {%endfor%}
