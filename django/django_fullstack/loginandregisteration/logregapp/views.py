@@ -6,11 +6,16 @@ import bcrypt
 
 # Create your views here.
 def index(request):
+    if 'user' in request.session :
+        return redirect('/welcome')
     return render(request,"index.html")
 def login(request):
+    if 'user' in request.session :
+        return redirect('/welcome')
     return render(request,"login.html")
 def reg(request):
-    
+    if 'user' in request.session :
+        return redirect('/welcome')
     if request.POST['password'] == request.POST['confirmpassword']:
         errors=User.objects.basic_validator(request.POST)
         if len(errors)>0:
@@ -20,7 +25,7 @@ def reg(request):
         else:
             hashpassword= bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt()).decode()
             data={'username':request.POST['Username'],
-            'password':hashpassword,
+            'hashpassword':hashpassword,
             'email':request.POST['email']}
             User.objects.create(username=request.POST['Username'],password=hashpassword,email=request.POST['email'])
             request.session['user']=data
@@ -34,6 +39,8 @@ def logout(request):
     request.session.clear()
     return render(request,"login.html")
 def loginz(request):
+    if 'user' in request.session :
+        return redirect('/welcome')
     psswd=request.POST['password']
     username=request.POST['Username']
     user = User.objects.filter(username=username)
@@ -44,7 +51,8 @@ def loginz(request):
 
             request.session['user']={
                 'username':username,
-                'password':psswd
+                'password':psswd,
+                'hashpass':logged_user.password
             }
            
             return redirect('/welcome')

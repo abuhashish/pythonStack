@@ -6,6 +6,7 @@ urlpatterns = [
     path('delete/<int:id>',views.delete),
     path('edit/<int:id>',views.edit),
     path('edit/applyedit',views.applyedit),
-    path('show/<int:id>',views.show)
+    path('show/<int:id>',views.show),
+    path('',views.root),
 
 ]

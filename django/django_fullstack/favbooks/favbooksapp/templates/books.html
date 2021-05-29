@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>welcome {{request.session.user.username}}</h1>
+    <a href="/logout">Logout</a>
+    <div class="main">
+        <div class="left">
+            <form action="addbook" method="POST">
+                {% csrf_token %}
+                <h1>Add A Book</h1>
+                <label for="title"> Title</label>
+                <input name="title" type="text">
+                <br><br>
+                <label for="desc">Description</label>
+                <textarea name="desc"></textarea>
+                <br><br>
+                <input type="hidden" name="user" value="{{request.session.user.id}}">
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+    
+    
+   
+    
+    {%for i in all%}
+    <h1><a href="books/{{i.id}}">{{i.title}}</a> {{i.desc}} {{i.uploaded_by.username}}</h1>
+    {% if user in i.users_who_like.all %}
+    you already like this
+    {% else %}
+    <P><a href="addtofav/{{i.id}}">add this in ur favorits</a></P>
+    {%endif%}
+    {%endfor%}
+</body>
+</html>

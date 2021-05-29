@@ -3,6 +3,8 @@ from tvshowsapp.models import *
 from django.contrib import messages
 
 # Create your views here.
+def root(request):
+    return redirect('/shows')
 def index(request):
     context={
         'x':Show.objects.all()

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>showbook</title>
+</head>
+<body>
+    <h1>welcome {{request.session.user.username}}</h1>
+    <a href="/logout">Logout</a>
+    {% if book.uploaded_by.id == request.session.user.id%}
+    <br>
+    <form method="POST" action="/update/{{book.id}}">
+        {% csrf_token %}
+    <input value="{{book.title}}" name="title">
+    <p>added by {{book.uploaded_by.username}}</p>
+    <p>added on {{book.created_at}}</p>
+    <p>Last updated on {{book.uploaded_at}}</p>
+    <input value="{{book.desc}}" name="desc">
+    <br>
+    <button type="submit">Update</button>
+    <a href="/delete/{{book.id}}">delete</a>
+    </form>
+    {% else %}
+    <p>{{book.title}}</p>
+    <p>added by {{book.uploaded_by.username}}</p>
+    <p>added on {{book.created_at}}</p>
+    <p>Last updated on {{book.uploaded_at}}</p>
+    <p>{{book.desc}}</p>
+    {%endif%}
+
+
+    {%for i in book.users_who_like.all %}
+    <ul>
+        
+        <li>{{i.username}}</li>
+    </ul>
+    {% endfor %}
+    {% if user in book.users_who_like.all%}
+    <a href="unfav/{{book.id}}">Un-favorite</a>
+    {%else%}
+    <a href="/addtofav/{{book.id}}">add to favorites</a>
+    {%endif%}
+    
+</body>
+</html>

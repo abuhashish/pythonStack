@@ -22,7 +22,7 @@
             </ul>
         </li>
     </ul>
-    <form action="/addauthorbook/{{book.id}}" method="post">
+    <form action="/addfavbook/{{book.id}}" method="post">
         {% csrf_token %}
         <select name="id">
             {%for i in z%}

@@ -15,3 +15,24 @@ def add(request):
     # }
     users.objects.create(first_name=request.POST['fname'],last_name=request.POST['lname'],email_address=request.POST['email'],age=int(request.POST['age']))
     return redirect("/")
+def get(request,id):
+    context={
+        'fname':users.objects.get(id=id).first_name,
+        'lname':users.objects.get(id=id).last_name,
+        'email':users.objects.get(id=id).email_address,
+        'age':users.objects.get(id=id).age,
+    }
+    return render(request,"get.html",context)
+def delete(request,id):
+    x=users.objects.get(id=id)
+    x.delete()
+    
+    return redirect ("/")
+def update(request,id):
+    context={
+        'fname':users.objects.get(id=id).first_name,
+        'lname':users.objects.get(id=id).last_name,
+        'email':users.objects.get(id=id).email_address,
+        'age':users.objects.get(id=id).age,
+    }
+    return render(request,"update.html",context)
